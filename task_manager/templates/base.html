@@ -1,0 +1,44 @@
+{% load tailwind_cli %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Менеджер задач</title>
+  {% tailwind_css %}
+</head>
+<body class="min-h-screen flex flex-col bg-white text-gray-900">
+
+  <nav class="bg-gray-100">
+    <div class="flex items-center justify-between px-6 py-4">
+      <div class="flex items-center gap-6">
+        <a href="{% url 'index' %}" class="font-bold">Менеджер задач</a>
+        <a href="#" class="hover:text-blue-600">Пользователи</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="#" class="hover:text-blue-600">Вход</a>
+        <a href="#" class="hover:text-blue-600">Регистрация</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="flex-1 w-full max-w-5xl mx-auto px-4 mt-6">
+    {% if messages %}
+      {% for message in messages %}
+        <div role="alert" class="mb-4 rounded border border-blue-200 bg-blue-50 px-4 py-3 text-blue-800">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="w-full max-w-5xl mx-auto px-4 mt-6">
+    <div class="border-t border-gray-300 py-4">
+      <a href="https://ru.hexlet.io" target="_blank" rel="noopener">Hexlet</a>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -9,3 +9,6 @@ htmlcov/
 build/
 .vscode/
 staticfiles/
+.django_tailwind_cli/
+assets/css/tailwind.css
+staticfiles/
