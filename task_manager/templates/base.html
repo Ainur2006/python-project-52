@@ -12,13 +12,20 @@
   <nav class="bg-gray-100">
     <div class="flex items-center justify-between px-6 py-4">
       <div class="flex items-center gap-6">
-        <a href="{% url 'index' %}" class="font-bold">Менеджер задач</a>
-        <a href="#" class="hover:text-blue-600">Пользователи</a>
-      </div>
-      <div class="flex items-center gap-4">
-        <a href="#" class="hover:text-blue-600">Вход</a>
-        <a href="#" class="hover:text-blue-600">Регистрация</a>
-      </div>
+    <a href="{% url 'index' %}" class="font-bold">Менеджер задач</a>
+    <a href="{% url 'users' %}" class="hover:text-blue-600">Пользователи</a>
+  </div>
+  <div class="flex items-center gap-4">
+    {% if user.is_authenticated %}
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="hover:text-blue-600">Выход</button>
+      </form>
+    {% else %}
+      <a href="{% url 'login' %}" class="hover:text-blue-600">Вход</a>
+      <a href="{% url 'user_create' %}" class="hover:text-blue-600">Регистрация</a>
+    {% endif %}
+  </div>
     </div>
   </nav>
 

@@ -42,7 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_tailwind_cli',
+    'task_manager.users',
 ]
+
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-6 text-3xl">{{ title }}</h1>
+<form method="post" class="max-w-md space-y-4">
+  {% csrf_token %}
+  {% for field in form %}
+    <div>
+      <label for="{{ field.id_for_label }}" class="mb-1 block font-medium">{{ field.label }}</label>
+      {{ field }}
+      {% for error in field.errors %}
+        <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+      {% endfor %}
+    </div>
+  {% endfor %}
+  {% for error in form.non_field_errors %}
+    <p class="text-sm text-red-600">{{ error }}</p>
+  {% endfor %}
+  <button type="submit" class="rounded bg-blue-600 px-5 py-2 text-white hover:bg-blue-700">{{ button }}</button>
+</form>
+{% endblock %}
