@@ -1,4 +1,4 @@
-.PHONY: install build-css collectstatic migrate setup dev build render-start
+.PHONY: install build-css collectstatic migrate setup dev build render-start test
 
 install:
 	uv sync
@@ -22,3 +22,6 @@ build:
 
 render-start:
 	gunicorn task_manager.wsgi
+
+test:
+	uv run python manage.py test

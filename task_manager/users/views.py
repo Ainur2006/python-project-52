@@ -27,7 +27,7 @@ class UserListView(ListView):
 
 class UserCreateView(SuccessMessageMixin, CreateView):
     form_class = UserForm
-    template_name = 'users/form.html'
+    template_name = 'form.html'
     success_url = reverse_lazy('login')
     success_message = 'Пользователь успешно зарегистрирован'
     extra_context = {'title': 'Регистрация', 'button': 'Зарегистрировать'}
@@ -36,7 +36,7 @@ class UserCreateView(SuccessMessageMixin, CreateView):
 class UserUpdateView(OwnerRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
     form_class = UserForm
-    template_name = 'users/form.html'
+    template_name = 'form.html'
     success_url = reverse_lazy('users')
     success_message = 'Пользователь успешно изменен'
     extra_context = {'title': 'Изменение пользователя', 'button': 'Изменить'}
@@ -51,7 +51,7 @@ class UserDeleteView(OwnerRequiredMixin, SuccessMessageMixin, DeleteView):
 
 class UserLoginView(SuccessMessageMixin, LoginView):
     form_class = LoginForm
-    template_name = 'users/form.html'
+    template_name = 'form.html'
     success_message = 'Вы залогинены'
     extra_context = {'title': 'Вход', 'button': 'Войти'}
 
