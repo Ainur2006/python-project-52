@@ -5,10 +5,33 @@
 <div class="mb-6 rounded border border-gray-200 bg-gray-50 p-6">
   <p class="mb-4">{{ task.description }}</p>
   <dl class="space-y-2">
-    <div><dt class="inline font-medium">Автор:</dt> <dd class="inline">{{ task.author.get_full_name|default:task.author.username }}</dd></div>
-    <div><dt class="inline font-medium">Исполнитель:</dt> <dd class="inline">{% if task.executor %}{{ task.executor.get_full_name|default:task.executor.username }}{% endif %}</dd></div>
-    <div><dt class="inline font-medium">Статус:</dt> <dd class="inline">{{ task.status.name }}</dd></div>
-    <div><dt class="inline font-medium">Дата создания:</dt> <dd class="inline">{{ task.created_at|date:"d.m.Y H:i" }}</dd></div>
+    <div>
+      <dt class="inline font-medium">Автор:</dt>
+      <dd class="inline">{{ task.author.get_full_name|default:task.author.username }}</dd>
+    </div>
+    <div>
+      <dt class="inline font-medium">Исполнитель:</dt>
+      <dd class="inline">
+        {% if task.executor %}
+          {{ task.executor.get_full_name|default:task.executor.username }}
+        {% endif %}</dd>
+    </div>
+    <div>
+      <dt class="inline font-medium">Статус:</dt>
+      <dd class="inline">{{ task.status.name }}</dd>
+    </div>
+    <div>
+      <dt class="inline font-medium">Метки:</dt>
+      <dd class="inline">
+        {% for label in task.labels.all %}
+        <span class="mr-1 rounded bg-gray-200 px-2 py-1 text-sm">{{ label.name }}</span>
+        {% endfor %}
+      </dd>
+    </div>
+    <div>
+      <dt class="inline font-medium">Дата создания:</dt>
+      <dd class="inline">{{ task.created_at|date:"d.m.Y H:i" }}</dd>
+    </div>
   </dl>
 </div>
 <div class="space-x-3">

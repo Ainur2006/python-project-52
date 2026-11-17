@@ -17,6 +17,7 @@
     {% if user.is_authenticated %}
     <a href="{% url 'statuses' %}" class="hover:text-blue-600">Статусы</a>
     <a href="{% url 'tasks' %}" class="hover:text-blue-600">Задачи</a>
+    <a href="{% url 'labels' %}" class="hover:text-blue-600">Метки</a>
     {% endif %}
   </div>
   <div class="flex items-center gap-4">

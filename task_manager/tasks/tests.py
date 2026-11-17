@@ -6,7 +6,7 @@ from .models import Task
 
 
 class TaskCRUDTest(TestCase):
-    fixtures = ['users.json', 'statuses.json', 'tasks.json']
+    fixtures = ['users.json', 'statuses.json', 'labels.json', 'tasks.json']
 
     def setUp(self):
         self.user = User.objects.get(pk=1)
