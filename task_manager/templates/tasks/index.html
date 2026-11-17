@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-6 text-3xl">Задачи</h1>
+<a href="{% url 'task_create' %}" class="mb-6 inline-block rounded bg-blue-600 px-5 py-2 text-white hover:bg-blue-700">Создать задачу</a>
+<table class="w-full text-left">
+  <thead>
+    <tr class="border-b">
+      <th class="py-2">ID</th>
+      <th>Имя</th>
+      <th>Статус</th>
+      <th>Автор</th>
+      <th>Исполнитель</th>
+      <th>Дата создания</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in tasks %}
+    <tr class="border-b">
+      <td class="py-2">{{ task.id }}</td>
+      <td><a href="{% url 'task_detail' task.pk %}" class="text-blue-600 hover:underline">{{ task.name }}</a></td>
+      <td>{{ task.status.name }}</td>
+      <td>{{ task.author.get_full_name|default:task.author.username }}</td>
+      <td>{% if task.executor %}{{ task.executor.get_full_name|default:task.executor.username }}{% endif %}</td>
+      <td>{{ task.created_at|date:"d.m.Y H:i" }}</td>
+      <td class="space-x-3">
+        <a href="{% url 'task_detail' task.pk %}" class="text-blue-600 hover:underline">Показать</a>
+        <a href="{% url 'task_update' task.pk %}" class="text-blue-600 hover:underline">Изменить</a>
+        <a href="{% url 'task_delete' task.pk %}" class="text-blue-600 hover:underline">Удалить</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
