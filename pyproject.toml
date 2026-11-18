@@ -16,6 +16,7 @@ dependencies = [
     "psycopg2-binary>=2.9.13",
     "python-dotenv>=1.2.4",
     "ruff>=0.17.5",
+    "sentry-sdk>=2.75.0",
     "whitenoise>=6.12.0",
 ]
 

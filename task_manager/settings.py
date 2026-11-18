@@ -155,3 +155,14 @@ MAILERS = {
 }
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
+import sentry_sdk
+
+SENTRY_DSN = os.getenv('SENTRY_DSN')
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        send_default_pii=True,
+        traces_sample_rate=0,
+    )
