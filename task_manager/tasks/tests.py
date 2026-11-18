@@ -49,3 +49,36 @@ class TaskCRUDTest(TestCase):
         response = self.client.post(reverse('task_delete', args=[1]), follow=True)
         self.assertContains(response, 'Задачу может удалить только ее автор')
         self.assertTrue(Task.objects.filter(pk=1).exists())
+
+
+class TaskFilterTest(TestCase):
+    fixtures = ['users.json', 'statuses.json', 'labels.json', 'tasks.json']
+
+    def setUp(self):
+        self.client.force_login(User.objects.get(pk=1))
+        self.url = reverse('tasks')
+
+    def test_no_filters(self):
+        response = self.client.get(self.url)
+        self.assertContains(response, 'Задача 1')
+        self.assertContains(response, 'Задача 2')
+
+    def test_filter_by_status(self):
+        response = self.client.get(self.url, {'status': 1})
+        self.assertContains(response, 'Задача 1')
+        self.assertNotContains(response, 'Задача 2')
+
+    def test_filter_by_executor(self):
+        response = self.client.get(self.url, {'executor': 2})
+        self.assertContains(response, 'Задача 1')
+        self.assertNotContains(response, 'Задача 2')
+
+    def test_filter_by_label(self):
+        response = self.client.get(self.url, {'label': 2})
+        self.assertContains(response, 'Задача 2')
+        self.assertNotContains(response, 'Задача 1')
+
+    def test_only_own_tasks(self):
+        response = self.client.get(self.url, {'self_tasks': 'on'})
+        self.assertContains(response, 'Задача 1')
+        self.assertNotContains(response, 'Задача 2')

@@ -34,9 +34,9 @@ class LabelCRUDTest(TestCase):
         self.assertEqual(Label.objects.get(pk=2).name, 'Улучшение')
 
     def test_delete_unused(self):
-        response = self.client.post(reverse('label_delete', args=[2]))
+        response = self.client.post(reverse('label_delete', args=[3]))
         self.assertRedirects(response, reverse('labels'))
-        self.assertFalse(Label.objects.filter(pk=2).exists())
+        self.assertFalse(Label.objects.filter(pk=3).exists())
 
     def test_delete_used_denied(self):
         response = self.client.post(reverse('label_delete', args=[1]), follow=True)

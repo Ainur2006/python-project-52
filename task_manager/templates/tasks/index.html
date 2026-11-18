@@ -3,6 +3,24 @@
 {% block content %}
 <h1 class="mb-6 text-3xl">Задачи</h1>
 <a href="{% url 'task_create' %}" class="mb-6 inline-block rounded bg-blue-600 px-5 py-2 text-white hover:bg-blue-700">Создать задачу</a>
+<form method="get" class="mb-6 rounded border border-gray-200 bg-gray-50 p-4">
+  <div class="grid gap-4 md:grid-cols-4">
+    {% for field in filter.form %}
+      {% if field.name == 'self_tasks' %}
+        <div class="flex items-end gap-2">
+          {{ field }}
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        </div>
+      {% else %}
+        <div>
+          <label for="{{ field.id_for_label }}" class="mb-1 block font-medium">{{ field.label }}</label>
+          {{ field }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <button type="submit" class="mt-4 rounded bg-blue-600 px-5 py-2 text-white hover:bg-blue-700">Показать</button>
+</form>
 <table class="w-full text-left">
   <thead>
     <tr class="border-b">
